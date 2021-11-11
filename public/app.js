@@ -16,3 +16,20 @@ const configureClient = async () => {
 window.onload = async () => {
   await configureClient();
 }
+
+// ..
+
+window.onload = async () => {
+  await configureClient();
+
+  // NEW - update the UI state
+  updateUI();
+};
+
+// NEW
+const updateUI = async () => {
+  const isAuthenticated = await auth0.isAuthenticated();
+
+  document.getElementById("btn-logout").disabled = !isAuthenticated;
+  document.getElementById("btn-login").disabled = isAuthenticated;
+};
